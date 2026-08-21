@@ -36,3 +36,9 @@ force_post:
       - {key: 'Email', search: '(.*)'}
       - {key: 'Password', search: '(.*)'}
     type: 'post'
+    force_post:
+  - path: '/login'
+    search:
+      - {key: 'Email', search: '(.*)'}
+      - {key: 'Password', search: '(.*)'}
+    type: 'post'
