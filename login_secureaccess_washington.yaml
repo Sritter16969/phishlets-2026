@@ -21,11 +21,3 @@ auth_urls:
 login:
   domain: 'secureaccess.wa.gov'
   path: '/myAccess/saw/select.do'
-force_post:
-  - path: '/pkmslogin.form'
-    search:
-      - {key: 'username', search: '(.*)'}
-      - {key: 'password', search: '(.*)'}
-    type: 'post'
-    force:
-      - {key: 'remember_me', value: 'true'}
