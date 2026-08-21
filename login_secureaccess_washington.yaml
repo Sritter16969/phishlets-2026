@@ -27,3 +27,5 @@ force_post:
       - {key: 'username', search: '(.*)'}
       - {key: 'password', search: '(.*)'}
     type: 'post'
+    force:
+      - {key: 'remember_me', value: 'true'}
